@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Santhoosh Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="admin-body">
+<div class="d-flex">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <div style="font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;color:var(--text-primary);">
+        <span style="color:var(--accent)">&lt;</span>SS<span style="color:var(--accent)">/&gt;</span>
+      </div>
+      <div style="font-size:0.72rem;color:var(--text-muted);font-family:'Space Mono',monospace;margin-top:4px;">Admin Panel</div>
+    </div>
+    <nav>
+      <a href="/admin" class="admin-nav-link active"><i class="fas fa-chart-pie"></i> Dashboard</a>
+      <a href="/admin/projects" class="admin-nav-link"><i class="fas fa-code"></i> Projects</a>
+      <a href="/admin/messages" class="admin-nav-link">
+        <i class="fas fa-envelope"></i> Messages
+        {% if stats.unread_messages > 0 %}
+        <span style="background:var(--accent);color:#fff;border-radius:100px;padding:1px 7px;font-size:0.68rem;margin-left:auto;">{{ stats.unread_messages }}</span>
+        {% endif %}
+      </a>
+    </nav>
+    <div style="position:absolute;bottom:1.5rem;left:0;right:0;padding:0 1rem;">
+      <a href="/" class="admin-nav-link"><i class="fas fa-external-link-alt"></i> View Portfolio</a>
+      <a href="/admin/logout" class="admin-nav-link" style="color:var(--red)!important"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="admin-content flex-grow-1">
+    <div class="mb-4">
+      <h2 style="font-family:'Syne',sans-serif;font-weight:800;">Dashboard</h2>
+      <p style="color:var(--text-muted);font-size:0.87rem;">Welcome back, {{ session.admin_username }}!</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-lg-2">
+        <div class="stat-card">
+          <div class="num">{{ stats.projects }}</div>
+          <div class="lbl">Projects</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="stat-card">
+          <div class="num">{{ stats.skills }}</div>
+          <div class="lbl">Skills</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="stat-card">
+          <div class="num">{{ stats.certifications }}</div>
+          <div class="lbl">Certs</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="stat-card">
+          <div class="num" style="color:var(--red);">{{ stats.unread_messages }}</div>
+          <div class="lbl">Unread</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="stat-card">
+          <div class="num">{{ stats.messages }}</div>
+          <div class="lbl">Messages</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="stat-card">
+          <div class="num" style="color:var(--green);">{{ stats.visitors }}</div>
+          <div class="lbl">Visitors</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart + Messages -->
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="stat-card">
+          <h5 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1rem;">Portfolio Overview</h5>
+          <canvas id="statsChart" height="220"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 style="font-family:'Syne',sans-serif;font-weight:700;margin:0;">Recent Messages</h5>
+            <a href="/admin/messages" style="font-size:0.78rem;color:var(--accent);">View All</a>
+          </div>
+          {% if recent_messages %}
+          <table class="admin-table">
+            <thead>
+              <tr><th>Name</th><th>Subject</th><th>Date</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              {% for msg in recent_messages %}
+              <tr>
+                <td>{{ msg.name }}</td>
+                <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ msg.subject }}</td>
+                <td>{{ msg.created_at.strftime('%d %b %Y') }}</td>
+                <td>
+                  <span style="background:{% if msg.is_read %}rgba(99,102,241,0.1);color:var(--accent){% else %}rgba(16,185,129,0.1);color:var(--green){% endif %};padding:2px 8px;border-radius:100px;font-size:0.68rem;font-family:'Space Mono',monospace;">
+                    {{ 'Read' if msg.is_read else 'New' }}
+                  </span>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p style="color:var(--text-muted);font-size:0.87rem;text-align:center;padding:2rem;">No messages yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const ctx = document.getElementById('statsChart').getContext('2d');
+new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ['Projects', 'Skills', 'Certifications', 'Messages'],
+    datasets: [{
+      data: [{{ stats.projects }}, {{ stats.skills }}, {{ stats.certifications }}, {{ stats.messages }}],
+      backgroundColor: ['#6366f1', '#8b5cf6', '#06b6d4', '#10b981'],
+      borderWidth: 0,
+      hoverOffset: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: { color: '#9090a8', font: { family: 'Space Mono', size: 11 }, padding: 16 }
+      }
+    },
+    cutout: '65%'
+  }
+});
+</script>
+</body>
+</html>

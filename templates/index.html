@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Santhoosh Shivan R - Python Full Stack Developer | ECE Student | AI & Software Developer. Portfolio showcasing projects, skills and experience." />
+  <meta name="keywords" content="Python Developer, Full Stack, Flask, Django, AI, ECE, Puducherry, Portfolio" />
+  <meta property="og:title" content="Santhoosh Shivan R - Python Full Stack Developer" />
+  <meta property="og:description" content="Portfolio of Santhoosh Shivan R – building intelligent, scalable web applications." />
+  <title>Santhoosh Shivan R | Python Full Stack Developer</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+  <!-- AOS Animations -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     CUSTOM CURSOR
+═══════════════════════════════════ -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-outline" id="cursorOutline"></div>
+
+<!-- ═══════════════════════════════════
+     PARTICLE BACKGROUND
+═══════════════════════════════════ -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- ═══════════════════════════════════
+     NAVBAR
+═══════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#home">
+      <span class="brand-bracket">&lt;</span>SS<span class="brand-bracket">/&gt;</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="hamburger-icon"><span></span><span></span><span></span></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#certifications">Certs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions ms-3">
+        <a href="/static/resume.pdf" class="btn-resume" download>
+          <i class="fas fa-download me-1"></i>Resume
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════
+     HERO SECTION
+═══════════════════════════════════ -->
+<section id="home" class="hero-section">
+  <div class="container">
+    <div class="row align-items-center min-vh-100">
+      <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1000">
+        <div class="hero-badge mb-3">
+          <span class="badge-dot"></span>
+          Available for Opportunities
+        </div>
+        <h1 class="hero-name">
+          Santhoosh<br />
+          <span class="name-accent">Shivan R</span>
+        </h1>
+        <div class="hero-title-wrap">
+          <span class="hero-role" id="typingText"></span>
+          <span class="typing-cursor">|</span>
+        </div>
+        <p class="hero-bio mt-4">
+          <strong>ECE Graduate (2026)</strong> crafting intelligent web applications.
+          Python enthusiast building scalable solutions with <strong>Flask, Django & AI</strong>.
+          Based in <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Puducherry, India</span>
+        </p>
+
+        <div class="hero-stats mt-4 mb-5">
+          <div class="stat-item">
+            <span class="stat-number" data-target="7">0</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="18">0</span>
+            <span class="stat-label">Technologies</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="{{ visitor_count }}">0</span>
+            <span class="stat-label">Visitors</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary-custom">
+            <i class="fas fa-code me-2"></i>View Projects
+          </a>
+          <a href="#contact" class="btn-secondary-custom ms-3">
+            <i class="fas fa-envelope me-2"></i>Contact Me
+          </a>
+          <div class="social-mini mt-3">
+            <a href="https://github.com/santhooshofficial" target="_blank" class="social-icon-mini" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/santhoosh-shivan" target="_blank" class="social-icon-mini" title="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:santhooshshivan18@gmail.com" class="social-icon-mini" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="tel:+917558105935" class="social-icon-mini" title="Phone">
+              <i class="fas fa-phone"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 d-none d-lg-flex justify-content-center" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+        <div class="hero-visual">
+          <div class="code-window">
+            <div class="window-bar">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+              <span class="window-title">santhoosh.py</span>
+            </div>
+            <div class="code-content">
+              <pre><span class="c-keyword">class</span> <span class="c-class">Developer</span>:
+    <span class="c-keyword">def</span> <span class="c-func">__init__</span>(self):
+        self.name = <span class="c-str">"Santhoosh Shivan R"</span>
+        self.role = <span class="c-str">"Python Full Stack Dev"</span>
+        self.location = <span class="c-str">"Puducherry, India"</span>
+        self.stack = [
+            <span class="c-str">"Python"</span>, <span class="c-str">"Flask"</span>,
+            <span class="c-str">"Django"</span>, <span class="c-str">"SQLite"</span>,
+            <span class="c-str">"JavaScript"</span>, <span class="c-str">"HTML/CSS"</span>
+        ]
+        self.interests = [
+            <span class="c-str">"AI/ML"</span>, <span class="c-str">"IoT"</span>,
+            <span class="c-str">"Data Analytics"</span>
+        ]
+
+    <span class="c-keyword">def</span> <span class="c-func">hire_me</span>(self):
+        <span class="c-keyword">return</span> <span class="c-str">"Let's build something great!"</span>
+
+<span class="c-var">me</span> = Developer()
+<span class="c-func">print</span>(me.hire_me())</pre>
+            </div>
+          </div>
+          <div class="floating-badge badge-1"><i class="fab fa-python"></i> Python</div>
+          <div class="floating-badge badge-2"><i class="fas fa-flask"></i> Flask</div>
+          <div class="floating-badge badge-3"><i class="fas fa-brain"></i> AI/ML</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll Down</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     ABOUT SECTION
+═══════════════════════════════════ -->
+<section id="about" class="section-padding">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">01. About</span>
+      <h2 class="section-title">Who Am I?</h2>
+    </div>
+
+    <div class="row g-5 mt-2">
+      <div class="col-lg-5" data-aos="fade-right">
+        <div class="about-card">
+          <div class="about-avatar">
+            <div class="avatar-ring"></div>
+            <div class="avatar-initials">SS</div>
+          </div>
+          <div class="about-info mt-4">
+            <div class="info-row"><i class="fas fa-graduation-cap"></i><span>B.E. ECE — Mailam Engineering College</span></div>
+            <div class="info-row"><i class="fas fa-calendar"></i><span>2022 – 2026 | CGPA: 8.36</span></div>
+            <div class="info-row"><i class="fas fa-map-marker-alt"></i><span>Puducherry, India</span></div>
+            <div class="info-row"><i class="fas fa-envelope"></i><span>santhooshshivan18@gmail.com</span></div>
+            <div class="info-row"><i class="fas fa-phone"></i><span>+91 7558105935</span></div>
+            <div class="info-row"><i class="fab fa-github"></i><a href="https://github.com/santhooshofficial" target="_blank">github.com/santhooshofficial</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7" data-aos="fade-left">
+        <p class="about-summary">
+          I'm an <strong>Electronics and Communication Engineering</strong> graduate (2026) from Mailam Engineering College
+          with deep expertise in Python development, web application architecture, and AI-driven solutions.
+        </p>
+        <p class="about-summary mt-3">
+          My journey spans from building healthcare prediction systems to enterprise billing platforms —
+          always driven by clean code, scalable design, and real-world impact. I thrive at the intersection of
+          <strong>backend engineering</strong>, <strong>database design</strong>, and <strong>intelligent automation</strong>.
+        </p>
+
+        <!-- Education Timeline -->
+        <div class="timeline mt-4">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <span class="tl-year">2022–2026</span>
+              <h5>B.E. Electronics & Communication Engineering</h5>
+              <p>Mailam Engineering College · CGPA: <strong>8.36</strong></p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <span class="tl-year">2021–2022</span>
+              <h5>Higher Secondary Education</h5>
+              <p>Aditya Vidhyasharam · <strong>82.67%</strong></p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <span class="tl-year">2019–2020</span>
+              <h5>SSLC</h5>
+              <p>Aditya Vidhyasharam · <strong>90.40%</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Internship highlight -->
+        <div class="internship-card mt-4" data-aos="fade-up">
+          <div class="intern-header">
+            <i class="fas fa-briefcase"></i>
+            <div>
+              <h5>Python Full Stack Development Internship</h5>
+              <span>FITA Academy, Puducherry</span>
+            </div>
+          </div>
+          <p class="mt-2">Intensive training in Python full stack development — backend APIs, frontend integration, database connectivity, and authentication systems.</p>
+          <div class="tech-tags mt-2">
+            <span>Python</span><span>Flask</span><span>Django</span><span>SQL</span><span>REST APIs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interests -->
+    <div class="row mt-5">
+      <div class="col-12" data-aos="fade-up">
+        <h4 class="interests-heading">Areas of Interest</h4>
+        <div class="interests-grid">
+          <div class="interest-item"><i class="fas fa-layer-group"></i><span>Full Stack Dev</span></div>
+          <div class="interest-item"><i class="fab fa-python"></i><span>Python</span></div>
+          <div class="interest-item"><i class="fas fa-brain"></i><span>Artificial Intelligence</span></div>
+          <div class="interest-item"><i class="fas fa-shield-alt"></i><span>Networks & Security</span></div>
+          <div class="interest-item"><i class="fas fa-microchip"></i><span>IoT Solutions</span></div>
+          <div class="interest-item"><i class="fas fa-cogs"></i><span>Software Engineering</span></div>
+          <div class="interest-item"><i class="fas fa-chart-bar"></i><span>Data Analytics</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SKILLS SECTION
+═══════════════════════════════════ -->
+<section id="skills" class="section-padding section-alt">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">02. Skills</span>
+      <h2 class="section-title">Technical Arsenal</h2>
+    </div>
+
+    <div class="row g-4 mt-2">
+      <!-- Programming Languages -->
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="skill-category-card">
+          <h4 class="skill-cat-title"><i class="fas fa-code"></i> Programming Languages</h4>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>Python</span><span>95%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>JavaScript</span><span>80%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="80"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>C</span><span>75%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="75"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Web Technologies -->
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="skill-category-card">
+          <h4 class="skill-cat-title"><i class="fas fa-globe"></i> Web Technologies</h4>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>HTML5 / CSS3</span><span>90%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>Flask</span><span>90%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>Django</span><span>78%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="78"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>Bootstrap 5</span><span>85%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Databases -->
+      <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+        <div class="skill-category-card">
+          <h4 class="skill-cat-title"><i class="fas fa-database"></i> Databases</h4>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>SQLite</span><span>88%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>SQL / MySQL</span><span>82%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="82"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>SQLAlchemy ORM</span><span>85%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools & Libraries -->
+      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+        <div class="skill-category-card">
+          <h4 class="skill-cat-title"><i class="fas fa-tools"></i> Tools & Libraries</h4>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>Git / GitHub</span><span>87%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="87"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>Pandas / NumPy</span><span>82%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="82"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-label"><span>OpenCV</span><span>75%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="75"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Icon Grid -->
+    <div class="tech-icon-grid mt-5" data-aos="fade-up">
+      <div class="tech-icon-item"><i class="fab fa-python"></i><span>Python</span></div>
+      <div class="tech-icon-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+      <div class="tech-icon-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+      <div class="tech-icon-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+      <div class="tech-icon-item"><i class="fab fa-bootstrap"></i><span>Bootstrap</span></div>
+      <div class="tech-icon-item"><i class="fas fa-flask"></i><span>Flask</span></div>
+      <div class="tech-icon-item"><i class="fas fa-globe"></i><span>Django</span></div>
+      <div class="tech-icon-item"><i class="fas fa-database"></i><span>SQLite</span></div>
+      <div class="tech-icon-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+      <div class="tech-icon-item"><i class="fab fa-github"></i><span>GitHub</span></div>
+      <div class="tech-icon-item"><i class="fas fa-eye"></i><span>OpenCV</span></div>
+      <div class="tech-icon-item"><i class="fas fa-microchip"></i><span>IoT</span></div>
+    </div>
+
+    <!-- Soft Skills -->
+    <div class="soft-skills-wrap mt-5" data-aos="fade-up">
+      <h4 class="mb-3">Soft Skills</h4>
+      <div class="soft-skills-row">
+        <span><i class="fas fa-puzzle-piece"></i> Problem Solving</span>
+        <span><i class="fas fa-users"></i> Team Collaboration</span>
+        <span><i class="fas fa-crown"></i> Leadership</span>
+        <span><i class="fas fa-comments"></i> Communication</span>
+        <span><i class="fas fa-clock"></i> Time Management</span>
+        <span><i class="fas fa-fire"></i> Self-Motivation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PROJECTS SECTION
+═══════════════════════════════════ -->
+<section id="projects" class="section-padding">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">03. Projects</span>
+      <h2 class="section-title">What I've Built</h2>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="project-controls mb-4" data-aos="fade-up">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="projectSearch" placeholder="Search projects..." />
+      </div>
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Healthcare AI">Healthcare AI</button>
+        <button class="filter-btn" data-filter="AI & ML">AI & ML</button>
+        <button class="filter-btn" data-filter="Enterprise">Enterprise</button>
+        <button class="filter-btn" data-filter="Computer Vision">Computer Vision</button>
+        <button class="filter-btn" data-filter="Education">Education</button>
+      </div>
+    </div>
+
+    <div class="row g-4" id="projectsGrid">
+      {% for project in projects %}
+      <div class="col-lg-6 col-xl-4 project-card-col"
+           data-category="{{ project.category }}"
+           data-title="{{ project.title.lower() }}"
+           data-aos="fade-up"
+           data-aos-delay="{{ loop.index0 * 80 }}">
+        <div class="project-card {% if project.featured %}featured{% endif %}">
+          {% if project.featured %}
+          <div class="featured-badge"><i class="fas fa-star"></i> Featured</div>
+          {% endif %}
+          <div class="project-header">
+            <div class="project-icon">
+              {% if 'Health' in project.category or 'Healthcare' in project.category %}
+                <i class="fas fa-heartbeat"></i>
+              {% elif 'AI' in project.category or 'ML' in project.category %}
+                <i class="fas fa-brain"></i>
+              {% elif 'Vision' in project.category %}
+                <i class="fas fa-eye"></i>
+              {% elif 'Enterprise' in project.category %}
+                <i class="fas fa-building"></i>
+              {% elif 'Education' in project.category %}
+                <i class="fas fa-graduation-cap"></i>
+              {% else %}
+                <i class="fas fa-code"></i>
+              {% endif %}
+            </div>
+            <span class="project-category">{{ project.category }}</span>
+          </div>
+          <h4 class="project-title">{{ project.title }}</h4>
+          <p class="project-desc">{{ project.description[:160] }}{% if project.description|length > 160 %}...{% endif %}</p>
+          <div class="project-tech">
+            {% for tech in project.technologies.split(', ')[:4] %}
+            <span class="tech-pill">{{ tech }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-actions mt-3">
+            <button class="btn-project-detail"
+                    data-title="{{ project.title }}"
+                    data-desc="{{ project.description }}"
+                    data-tech="{{ project.technologies }}"
+                    data-features="{{ project.features }}"
+                    data-github="{{ project.github_url or '' }}"
+                    onclick="openProjectModal(this)">
+              <i class="fas fa-info-circle me-1"></i>Details
+            </button>
+            {% if project.github_url %}
+            <a href="{{ project.github_url }}" target="_blank" class="btn-project-github">
+              <i class="fab fa-github"></i>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CERTIFICATIONS SECTION
+═══════════════════════════════════ -->
+<section id="certifications" class="section-padding section-alt">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">04. Credentials</span>
+      <h2 class="section-title">Certifications & Achievements</h2>
+    </div>
+
+    <div class="row g-4 mt-2 justify-content-center">
+      {% for cert in certifications %}
+      <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 150 }}">
+        <div class="cert-card {% if cert.cert_type == 'participation' %}cert-participation{% endif %}">
+          <div class="cert-icon">
+            {% if cert.cert_type == 'certificate' %}
+              <i class="fas fa-certificate"></i>
+            {% else %}
+              <i class="fas fa-award"></i>
+            {% endif %}
+          </div>
+          <div class="cert-info">
+            <h5>{{ cert.title }}</h5>
+            <p class="cert-issuer"><i class="fas fa-building me-1"></i>{{ cert.issuer }}</p>
+            <p class="cert-meta"><i class="fas fa-map-marker-alt me-1"></i>{{ cert.location }} · <i class="fas fa-calendar me-1"></i>{{ cert.year }}</p>
+            <span class="cert-type-badge">{{ 'Certificate' if cert.cert_type == 'certificate' else 'Participation' }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- Hackathon highlight -->
+      <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="300">
+        <div class="cert-card cert-hackathon">
+          <div class="cert-icon"><i class="fas fa-rocket"></i></div>
+          <div class="cert-info">
+            <h5>Python Full Stack Development</h5>
+            <p class="cert-issuer"><i class="fas fa-building me-1"></i>FITA Academy</p>
+            <p class="cert-meta"><i class="fas fa-map-marker-alt me-1"></i>Puducherry · <i class="fas fa-calendar me-1"></i>2024</p>
+            <span class="cert-type-badge">Internship</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Academic Highlight -->
+    <div class="academic-highlight mt-5" data-aos="fade-up">
+      <div class="row g-3 justify-content-center">
+        <div class="col-auto">
+          <div class="acad-stat"><span class="acad-num">8.36</span><span class="acad-label">CGPA</span></div>
+        </div>
+        <div class="col-auto">
+          <div class="acad-stat"><span class="acad-num">90.4%</span><span class="acad-label">SSLC</span></div>
+        </div>
+        <div class="col-auto">
+          <div class="acad-stat"><span class="acad-num">82.7%</span><span class="acad-label">HSC</span></div>
+        </div>
+        <div class="col-auto">
+          <div class="acad-stat"><span class="acad-num">7+</span><span class="acad-label">Projects</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CONTACT SECTION
+═══════════════════════════════════ -->
+<section id="contact" class="section-padding">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">05. Contact</span>
+      <h2 class="section-title">Let's Connect</h2>
+    </div>
+
+    <div class="row g-5 mt-2 align-items-start">
+      <div class="col-lg-5" data-aos="fade-right">
+        <div class="contact-info-wrap">
+          <p class="contact-tagline">Open to internships, campus placements, and exciting developer roles. Let's build something amazing together.</p>
+          <div class="contact-links mt-4">
+            <a href="mailto:santhooshshivan18@gmail.com" class="contact-link-item">
+              <div class="cl-icon"><i class="fas fa-envelope"></i></div>
+              <div class="cl-text">
+                <span class="cl-label">Email</span>
+                <span class="cl-value">santhooshshivan18@gmail.com</span>
+              </div>
+            </a>
+            <a href="tel:+917558105935" class="contact-link-item">
+              <div class="cl-icon"><i class="fas fa-phone"></i></div>
+              <div class="cl-text">
+                <span class="cl-label">Phone</span>
+                <span class="cl-value">+91 7558105935</span>
+              </div>
+            </a>
+            <a href="https://github.com/santhooshofficial" target="_blank" class="contact-link-item">
+              <div class="cl-icon"><i class="fab fa-github"></i></div>
+              <div class="cl-text">
+                <span class="cl-label">GitHub</span>
+                <span class="cl-value">github.com/santhooshofficial</span>
+              </div>
+            </a>
+            <a href="https://linkedin.com/in/santhoosh-shivan" target="_blank" class="contact-link-item">
+              <div class="cl-icon"><i class="fab fa-linkedin"></i></div>
+              <div class="cl-text">
+                <span class="cl-label">LinkedIn</span>
+                <span class="cl-value">linkedin.com/in/santhoosh-shivan</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7" data-aos="fade-left">
+        <div class="contact-form-wrap">
+          <div id="formSuccess" class="form-success-msg" style="display:none">
+            <i class="fas fa-check-circle"></i> Message sent! I'll get back to you soon.
+          </div>
+          <div id="contactForm">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="form-group-custom">
+                  <input type="text" id="contactName" placeholder="Your Name" />
+                  <span class="field-error" id="nameError"></span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group-custom">
+                  <input type="email" id="contactEmail" placeholder="Your Email" />
+                  <span class="field-error" id="emailError"></span>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group-custom">
+                  <input type="text" id="contactSubject" placeholder="Subject" />
+                  <span class="field-error" id="subjectError"></span>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group-custom">
+                  <textarea id="contactMessage" rows="5" placeholder="Your message..."></textarea>
+                  <span class="field-error" id="messageError"></span>
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn-submit-contact" id="submitBtn" onclick="submitContact()">
+                  <span id="submitText"><i class="fas fa-paper-plane me-2"></i>Send Message</span>
+                  <span id="submitLoading" style="display:none"><i class="fas fa-spinner fa-spin me-2"></i>Sending...</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="brand-bracket">&lt;</span>SS<span class="brand-bracket">/&gt;</span>
+        <p>Santhoosh Shivan R · Python Full Stack Developer</p>
+        <p>Puducherry, India · 2025</p>
+      </div>
+      <div class="footer-right">
+        <div class="footer-social">
+          <a href="https://github.com/santhooshofficial" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/santhoosh-shivan" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="mailto:santhooshshivan18@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p class="footer-copy">Designed & Built by Santhoosh Shivan R</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Chatbot -->
+<div class="chatbot-wrapper">
+  <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">
+    <i class="fas fa-robot" id="chatIcon"></i>
+    <i class="fas fa-times" id="chatClose" style="display:none"></i>
+  </button>
+  <div class="chatbot-box" id="chatbotBox" style="display:none">
+    <div class="chatbot-header">
+      <i class="fas fa-robot me-2"></i>Santhoosh's Assistant
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+      <div class="chat-msg bot-msg">Hi! I'm Santhoosh's portfolio assistant. Ask me about his skills, projects, or how to contact him!</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Ask something..." onkeypress="chatEnter(event)" />
+      <button onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- Project Modal -->
+<div class="modal fade" id="projectModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content project-modal-content">
+      <div class="modal-header border-0">
+        <h4 class="modal-title" id="modalTitle"></h4>
+        <button type="button" class="btn-close-modal" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <p id="modalDesc"></p>
+        <div class="mt-3">
+          <h6><i class="fas fa-microchip me-2"></i>Technologies</h6>
+          <div id="modalTech" class="tech-tags"></div>
+        </div>
+        <div class="mt-3">
+          <h6><i class="fas fa-list-check me-2"></i>Key Features</h6>
+          <ul id="modalFeatures" class="modal-features-list"></ul>
+        </div>
+        <div class="mt-3" id="modalGithubWrap">
+          <a id="modalGithub" href="#" target="_blank" class="btn-primary-custom">
+            <i class="fab fa-github me-2"></i>View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
