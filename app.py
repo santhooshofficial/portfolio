@@ -76,6 +76,11 @@ class VisitorAnalytics(db.Model):
     page_visited = db.Column(db.String(200))
     visited_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+
+# Create database tables
+with app.app_context():
+    db.create_all()
+
 # ─────────────────────────────────────────
 # HELPERS
 # ─────────────────────────────────────────
@@ -94,13 +99,14 @@ def log_visitor(page):
     try:
         visitor = VisitorAnalytics(
             ip_address=request.remote_addr,
-            user_agent=request.headers.get('User-Agent', '')[:500],
+            user_agent=request.headers.get("User-Agent", "")[:500],
             page_visited=page
         )
         db.session.add(visitor)
         db.session.commit()
-    except:
-        pass
+    except Exception as e:
+        db.session.rollback()
+        print("Visitor Analytics Error:", e)
 
 def admin_required(f):
     from functools import wraps
@@ -294,16 +300,6 @@ def seed_database():
                 'order_index': 1
             },
             {
-                'title': 'AI-Powered Petition Management System',
-                'description': 'An intelligent petition management platform leveraging Machine Learning for automatic categorization, department allocation, and urgency detection with citizen communication portal.',
-                'technologies': 'Python, Flask, SQLite, Machine Learning',
-                'features': 'AI categorization|Department allocation|Urgency detection|Automated reminders|Status tracking|Citizen communication portal|Analytics dashboard',
-                'github_url': 'https://github.com/santhooshofficial',
-                'category': 'AI & ML',
-                'featured': True,
-                'order_index': 2
-            },
-            {
                 'title': 'Maternal & Newborn Health Monitoring System',
                 'description': 'Comprehensive health tracking system for mothers and newborns with unique Health IDs, vaccination schedules, growth tracking, and birth certificate integration.',
                 'technologies': 'Python, Flask, SQLite',
@@ -312,16 +308,6 @@ def seed_database():
                 'category': 'Healthcare',
                 'featured': True,
                 'order_index': 3
-            },
-            {
-                'title': 'Coastal Erosion Monitoring System',
-                'description': 'GIS-powered coastal monitoring system with AI prediction models for tracking erosion patterns, climate analysis, and coastal risk assessment.',
-                'technologies': 'Python, GIS, Remote Sensing',
-                'features': 'GIS integration|AI prediction|Climate analysis|Coastal monitoring dashboard|Risk assessment',
-                'github_url': 'https://github.com/santhooshofficial',
-                'category': 'GIS & Environment',
-                'featured': False,
-                'order_index': 4
             },
             {
                 'title': 'NexusPOS Enterprise Billing System',
@@ -353,6 +339,16 @@ def seed_database():
                 'featured': True,
                 'order_index': 7
             },
+            {
+                'title': 'APP Suzuki Motors — Smart Dealership System',
+                'description': 'A complete full-stack dealership management system for APP Suzuki Motors built with Python Flask. Customers can view bikes, book online, calculate EMI, book test rides, and order spare parts — while management gets powerful analytics, inventory control, and customer insights.',
+                'technologies': 'Python, Flask, SQLite, Bootstrap 5, Chart.js, JavaScript',
+                'features': 'Online bike booking|EMI calculator|Test ride booking|Spare parts store|Admin dashboard & analytics|AI bike recommender|Customer feedback system|REST API endpoints',
+                'github_url': 'https://github.com/santhooshofficial',
+                'category': 'Enterprise',
+                'featured': True,
+                'order_index': 8
+            },
         ]
         for p in projects_data:
             db.session.add(Project(**p))
@@ -366,6 +362,12 @@ def seed_database():
         for title, issuer, loc, year, cert_type in certs_data:
             db.session.add(Certification(title=title, issuer=issuer, location=loc, year=year, cert_type=cert_type))
 
+    # Remove retired projects if they exist in DB
+    for title_to_remove in ['Coastal Erosion Monitoring System', 'AI-Powered Petition Management System']:
+        p = Project.query.filter_by(title=title_to_remove).first()
+        if p:
+            db.session.delete(p)
+
     db.session.commit()
     print("✅ Database seeded successfully!")
 
@@ -374,8 +376,10 @@ def seed_database():
 # APP ENTRY POINT
 # ─────────────────────────────────────────
 
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        seed_database()
-    app.run(debug=True, port=5000)
+# Initialize database and seed data
+with app.app_context():
+    db.create_all()
+    seed_database()
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
