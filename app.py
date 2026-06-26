@@ -77,10 +77,6 @@ class VisitorAnalytics(db.Model):
     visited_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-# Create database tables
-with app.app_context():
-    db.create_all()
-
 # ─────────────────────────────────────────
 # HELPERS
 # ─────────────────────────────────────────
@@ -375,11 +371,19 @@ def seed_database():
 # ─────────────────────────────────────────
 # APP ENTRY POINT
 # ─────────────────────────────────────────
+print("Starting Flask app...")
 
-# Initialize database and seed data
 with app.app_context():
+    print("Creating database...")
     db.create_all()
+
+    print("Seeding database...")
     seed_database()
 
+print("Database ready.")
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
