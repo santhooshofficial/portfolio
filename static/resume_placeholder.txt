@@ -1,6 +1,0 @@
-Place your resume PDF here as: resume.pdf
-
-This file should be named exactly: resume.pdf
-Location: static/resume.pdf
-
-The Download Resume button in the navbar links to this file.
