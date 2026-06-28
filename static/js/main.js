@@ -6,29 +6,70 @@
 // ─── INIT AOS ───
 AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
 
-// ─── THEME (light only) ───
-document.documentElement.setAttribute('data-theme', 'light');
+// ─── THEME TOGGLE ───
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+let currentTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', currentTheme);
+updateThemeIcon();
 
-// ─── CUSTOM CURSOR ───
+function updateThemeIcon() {
+  if (currentTheme === 'light') {
+    themeIcon.className = 'fas fa-moon';
+  } else {
+    themeIcon.className = 'fas fa-sun';
+  }
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('theme', currentTheme);
+    updateThemeIcon();
+  });
+}
+
 const cursorDot = document.getElementById('cursorDot');
 const cursorOutline = document.getElementById('cursorOutline');
 if (cursorDot && cursorOutline && window.innerWidth > 768) {
+  let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+  let trailX = mouseX, trailY = mouseY;
+  let dotAngle = 0, trailAngle = 0;
+  const DOT_SIZE = 18, TRAIL_SIZE = 32;
+
   document.addEventListener('mousemove', (e) => {
-    cursorDot.style.left = e.clientX + 'px';
-    cursorDot.style.top = e.clientY + 'px';
-    setTimeout(() => {
-      cursorOutline.style.left = e.clientX + 'px';
-      cursorOutline.style.top = e.clientY + 'px';
-    }, 80);
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   });
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function animate() {
+    trailX = lerp(trailX, mouseX, 0.08);
+    trailY = lerp(trailY, mouseY, 0.08);
+    dotAngle   = (dotAngle   + 3) % 360;
+    trailAngle = (trailAngle + 1.2) % 360;
+
+    cursorDot.style.transform =
+      `translate(${mouseX - DOT_SIZE / 2}px, ${mouseY - DOT_SIZE / 2}px) rotate(${dotAngle}deg)`;
+    cursorOutline.style.transform =
+      `translate(${trailX - TRAIL_SIZE / 2}px, ${trailY - TRAIL_SIZE / 2}px) rotate(${trailAngle}deg)`;
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+
   document.querySelectorAll('a, button, .project-card, .filter-btn').forEach(el => {
     el.addEventListener('mouseenter', () => {
-      cursorOutline.style.transform = 'translate(-50%,-50%) scale(1.6)';
-      cursorOutline.style.borderColor = 'var(--accent-3)';
+      cursorOutline.style.filter = 'drop-shadow(0 0 10px #6366f1) drop-shadow(0 0 20px #8b5cf6)';
+      cursorOutline.style.opacity = '0.9';
+      cursorDot.querySelector('polygon').setAttribute('fill', '#a5b4fc');
     });
     el.addEventListener('mouseleave', () => {
-      cursorOutline.style.transform = 'translate(-50%,-50%) scale(1)';
-      cursorOutline.style.borderColor = 'var(--accent)';
+      cursorOutline.style.filter = 'drop-shadow(0 0 6px #6366f1) drop-shadow(0 0 12px #8b5cf6)';
+      cursorOutline.style.opacity = '0.55';
+      cursorDot.querySelector('polygon').setAttribute('fill', '#6366f1');
     });
   });
 }
@@ -104,11 +145,10 @@ const typingEl = document.getElementById('typingText');
 if (typingEl) {
   const roles = [
     'Python Full Stack Developer',
-    'ECE Graduate (2026)',
-    'AI Prompt Engineer',
+    'ECE Final Year Student',
+    'AI & Software Developer',
     'Flask & Django Engineer',
-    'Backend Developer',
-    'Software Developer'
+    'Backend Developer'
   ];
   let roleIdx = 0, charIdx = 0, deleting = false;
 

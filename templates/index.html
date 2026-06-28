@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,9 +25,16 @@
 <!-- ═══════════════════════════════════
      CUSTOM CURSOR
 ═══════════════════════════════════ -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-outline" id="cursorOutline"></div>
-
+<!-- Fast small star cursor -->
+<svg class="cursor-dot" id="cursorDot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <polygon points="12,2 14.9,9.26 22.6,9.27 16.7,13.97 18.9,21.17 12,16.9 5.1,21.17 7.3,13.97 1.4,9.27 9.1,9.26"
+    fill="#6366f1" stroke="#a5b4fc" stroke-width="0.8"/>
+</svg>
+<!-- Slow trailing large star cursor -->
+<svg class="cursor-outline" id="cursorOutline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <polygon points="12,2 14.9,9.26 22.6,9.27 16.7,13.97 18.9,21.17 12,16.9 5.1,21.17 7.3,13.97 1.4,9.27 9.1,9.26"
+    fill="none" stroke="#8b5cf6" stroke-width="1.5"/>
+</svg>
 <!-- ═══════════════════════════════════
      PARTICLE BACKGROUND
 ═══════════════════════════════════ -->
@@ -54,6 +61,9 @@
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
       <div class="nav-actions ms-3">
+        <button class="btn-theme-toggle" id="themeToggle" title="Toggle theme">
+          <i class="fas fa-sun" id="themeIcon"></i>
+        </button>
         <a href="/static/resume.pdf" class="btn-resume" download>
           <i class="fas fa-download me-1"></i>Resume
         </a>
@@ -81,14 +91,16 @@
           <span class="hero-role" id="typingText"></span>
           <span class="typing-cursor">|</span>
         </div>
-        <p class="hero-bio mt-4">
-          <strong>ECE Graduate (2026)</strong> passionate about building intelligent, scalable, and user-centric web applications.
-Skilled in <strong>Python, Flask, Django, JavaScript, SQL, and AI-powered solutions</strong>, with a strong interest in full-stack development, automation, and solving real-world problems through technology.
-        </p>
+        <p>
+  <strong>ECE Graduate (2026)</strong> transitioning into Full-Stack Development,
+  specializing in <strong>Python, Flask, Django & AI</strong>.
+  Passionate about building scalable, high-performance web applications and
+  delivering innovative, user-focused digital solutions.
+</p>
 
         <div class="hero-stats mt-4 mb-5">
           <div class="stat-item">
-            <span class="stat-number" data-target="6">0</span>
+            <span class="stat-number" data-target="7">0</span>
             <span class="stat-label">Projects</span>
           </div>
           <div class="stat-divider"></div>
@@ -203,7 +215,7 @@ Skilled in <strong>Python, Flask, Django, JavaScript, SQL, and AI-powered soluti
 
       <div class="col-lg-7" data-aos="fade-left">
         <p class="about-summary">
-          I'm an <strong>Electronics and Communication Engineering</strong> graduate (2026) from Mailam Engineering College
+          I'm a final-year <strong>Electronics and Communication Engineering</strong> student at Mailam Engineering College
           with deep expertise in Python development, web application architecture, and AI-driven solutions.
         </p>
         <p class="about-summary mt-3">
@@ -549,7 +561,7 @@ Skilled in <strong>Python, Flask, Django, JavaScript, SQL, and AI-powered soluti
           <div class="acad-stat"><span class="acad-num">82.7%</span><span class="acad-label">HSC</span></div>
         </div>
         <div class="col-auto">
-          <div class="acad-stat"><span class="acad-num">6+</span><span class="acad-label">Projects</span></div>
+          <div class="acad-stat"><span class="acad-num">7+</span><span class="acad-label">Projects</span></div>
         </div>
       </div>
     </div>
